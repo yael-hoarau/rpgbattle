@@ -44,11 +44,11 @@ $_SESSION['findstep'] = 1;
 		function req(type)
 		{
 			var xhr = new XMLHttpRequest();
-			xhr.open('GET', 'src/dynamic/findroom.php?type=' + type);
+			xhr.open('GET', 'src/dynamic/refresh.php?type=' + type);
 
 			xhr.addEventListener('readystatechange', function()
 			{
-	    		if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) 
+	    		if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200)
 	    		{
 	    			var content = xhr.responseText;
 	    			if(content == "noroom")
@@ -60,7 +60,7 @@ $_SESSION['findstep'] = 1;
 	    				window.location = "room.php";
 	    			}
 	    			if(content == "createok")
-	    			{	
+	    			{
 	    				waitfor();
 	    			}
 	    			if(content == "erorcreate")
