@@ -2,7 +2,27 @@
 session_start();
 require("../php/function/db.php");
 
+function test_life($pseudo, $life)
+{
+	if($life <= 0 )
+	{
+		if($pseudo == $_SESSION['pseudo'])
+			return "lose";
+		else
+			return "win1";
+	
+	}
+	return "continue";
+}
 
+function isPresent($pseudo)
+{
+	$req_ping = $db->query("SELECT ping FROM player WHERE player.pseudo == '" . $pseudo . "' ");
+	$data_ping = $req_ping->fetch();
+	$current_date = date('Y-m-d H:i:s');
+	date_sub($current_date, date_interval_create_from_date_string('3 seconds'));
+	return $data_ping['ping'] > $current_date;
+}
 
 
 
@@ -17,14 +37,21 @@ if(isset($_SESSION['roomname']) and isset($_SESSION['pseudo']))
 		if($_GET['type'] == "search" and $_SESSION['findstep'] == 1)
 		{
 			$i = 0;
-			$req_search = $db->query("SELECT name FROM room WHERE state = 'waiting' ORDER BY date_create ASC LIMIT 1");
+			$req_search = $db->query("SELECT name FROM room WHERE state = 'waiting' ORDER BY date_create ASC ");
 			while($data_search = $req_search->fetch())
 			{
-				$_SESSION['roomname'] = $data_search['name'];
-				$db->query("UPDATE room SET state = 'running', player2 = (SELECT id FROM player WHERE pseudo = '" . $_SESSION['pseudo'] . "') WHERE name = '" . $data_search['name'] . "'");
-				echo "room";
-				unset($_SESSION['findstep']);
-				$i++;
+				$req_creator = $db->query("SELECT pseudo FROM player WHERE id = '" . $data_search['player1'] .  "' ");
+				$data_creator = $req_creator->fetch();
+				if(isPresent($data_creator['pseudo']))
+				{
+					$_SESSION['roomname'] = $data_search['name'];
+					$db->query("UPDATE room SET state = 'running', player2 = (SELECT id FROM player WHERE pseudo = '" . $_SESSION['pseudo'] . "') WHERE name = '" . $data_search['name'] . "'");
+					echo "room";
+					unset($_SESSION['findstep']);
+					$i++;
+					break;
+				}
+				
 			}
 			if($i == 0)
 			{
@@ -79,14 +106,14 @@ if(isset($_SESSION['roomname']) and isset($_SESSION['pseudo']))
 
 
 
-	else if($_SESSION['roomname'] != "none")
+	else
 	{
 
 		// Refresh attributs
 		
-		$req_player1 = $db->query("SELECT life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) 
+		$req_player1 = $db->query("SELECT pseudo, ping, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) 
 			AND player.pseudo = '" . $_SESSION['pseudo'] . "' ");
-		$req_player2 = $db->query("SELECT life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2)
+		$req_player2 = $db->query("SELECT pseudo, ping, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2)
 			AND player.pseudo != '" . $_SESSION['pseudo'] . "' ");
 		$data_player1 = $req_player1->fetch();
 		$data_player2 = $req_player2->fetch();
@@ -99,12 +126,8 @@ if(isset($_SESSION['roomname']) and isset($_SESSION['pseudo']))
 
 		// Test Room
 
-		$req_ping = $db->query("SELECT ping FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2)
-			AND player.pseudo != '" . $_SESSION['pseudo'] . "' ");
-		$data_ping = $req_ping->fetch();
-		$current_date = date('Y-m-d H:i:s');
-		date_sub($current_date, date_interval_create_from_date_string('2 seconds'));
-		if($data_ping['ping'] < $current_date ) 
+		
+		if(!isPresent($data_player2['pseudo']) ) 
 		{
 			session_destroy();
 			$systeme = "win 2";
@@ -123,29 +146,7 @@ if(isset($_SESSION['roomname']) and isset($_SESSION['pseudo']))
 								"systeme" => $systeme);
 
 		echo json_encode($data_refresh);
-
 	}
-}
-
-
- 
-
-
-
-
-
-
-function test_life($pseudo, $life)
-{
-	if($life <= 0 )
-	{
-		if($pseudo == $_SESSION['pseudo'])
-			return "lose";
-		else
-			return "win1";
-	
-	}
-	return "continue";
 }
 
 
