@@ -15,13 +15,14 @@ function test_life($pseudo, $life)
 	return "continue";
 }
 
-function isPresent($pseudo)
+function isPresent($pseudo, $db)
 {
-	$req_ping = $db->query("SELECT ping FROM player WHERE player.pseudo == '" . $pseudo . "' ");
+	$req_ping = $db->query("SELECT ping FROM player WHERE player.pseudo = '" . $pseudo . "' ");
 	$data_ping = $req_ping->fetch();
-	$current_date = date('Y-m-d H:i:s');
+	$current_date = date_create_from_format('Y-m-d H:i:s', date('Y-m-d H:i:s'));
 	date_sub($current_date, date_interval_create_from_date_string('3 seconds'));
-	return $data_ping['ping'] > $current_date;
+	$ping_date = date_create_from_format('Y-m-d H:i:s', $data_ping['ping']);
+	return  $ping_date > $current_date;
 }
 
 
@@ -37,12 +38,12 @@ if(isset($_SESSION['roomname']) and isset($_SESSION['pseudo']))
 		if($_GET['type'] == "search" and $_SESSION['findstep'] == 1)
 		{
 			$i = 0;
-			$req_search = $db->query("SELECT name FROM room WHERE state = 'waiting' ORDER BY date_create ASC ");
+			$req_search = $db->query("SELECT name, player1 FROM room WHERE state = 'waiting' ORDER BY date_create ASC ");
 			while($data_search = $req_search->fetch())
 			{
-				$req_creator = $db->query("SELECT pseudo FROM player WHERE id = '" . $data_search['player1'] .  "' ");
+				$req_creator = $db->query("SELECT pseudo FROM player WHERE id = " . $data_search['player1'] .  " ");
 				$data_creator = $req_creator->fetch();
-				if(isPresent($data_creator['pseudo']))
+				if(isPresent($data_creator['pseudo'], $db))
 				{
 					$_SESSION['roomname'] = $data_search['name'];
 					$db->query("UPDATE room SET state = 'running', player2 = (SELECT id FROM player WHERE pseudo = '" . $_SESSION['pseudo'] . "') WHERE name = '" . $data_search['name'] . "'");
@@ -127,7 +128,7 @@ if(isset($_SESSION['roomname']) and isset($_SESSION['pseudo']))
 		// Test Room
 
 		
-		if(!isPresent($data_player2['pseudo']) ) 
+		if(!isPresent($data_player2['pseudo'], $db) ) 
 		{
 			session_destroy();
 			$systeme = "win 2";
