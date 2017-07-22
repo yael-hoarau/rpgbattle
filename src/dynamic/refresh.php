@@ -142,11 +142,11 @@ function test_life($pseudo, $life)
 		if($pseudo == $_SESSION['pseudo'])
 			return "lose";
 		else
-			return = "win1";
+			return "win1";
 	
 	}
 	return "continue";
 }
 
 
-?>	
+?>
