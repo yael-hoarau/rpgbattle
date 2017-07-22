@@ -10,6 +10,7 @@ if(!isset($_SESSION['pseudo']) OR !isset($_SESSION['roomname']) OR $_SESSION['ro
 $req_player2_pseudo = $db->query("SELECT pseudo FROM player JOIN room WHERE player.pseudo != '" . $_SESSION['pseudo'] . "' AND (player.id = room.player1 OR player.id = room.player2)");
 $data_player2_pseudo = $req_player2_pseudo->fetch();
 $player2_pseudo = $data_player2_pseudo['pseudo'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +21,11 @@ $player2_pseudo = $data_player2_pseudo['pseudo'];
 		<!-- SCRIPT -->		
 			<script src="src/js/manage_room.js"></script>
 			<script>
-				refresh();
+			
+
+				window.addEventListener('beforeunload', function(){	leave('event');});
+				test_room();
+				refresh_attributs();
 			</script>
 		<!-- SCRIPT -->
 
