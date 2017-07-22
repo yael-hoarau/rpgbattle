@@ -131,20 +131,20 @@ if(isset($_SESSION['roomname']) and isset($_SESSION['pseudo']))
 		if(!isPresent($data_player2['pseudo'], $db) ) 
 		{
 			session_destroy();
-			$systeme = "win 2";
+			$system = "win2";
 		}
 		else 
 		{
 			$req_players = $db->query("SELECT pseudo,life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) ");
 			while($data_players = $req_players->fetch())
 			{
-				$systeme = test_life($data_players['pseudo'], $data_players['life']);
+				$system = test_life($data_players['pseudo'], $data_players['life']);
 			}
 		}
 
 		$data_refresh = array ("player1" => $player1,
 								"player2" => $player2,
-								"systeme" => $systeme);
+								"system" => $system);
 
 		echo json_encode($data_refresh);
 	}
