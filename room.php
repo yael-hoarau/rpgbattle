@@ -14,32 +14,53 @@ $player2_pseudo = $data_player2_pseudo['pseudo'];
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="src/css/room.css"/>
+        <title>RPG battle.io</title>
+
+        <script src="src/js/manage_room.js"></script>
 	</head>
 
-	<body>
+	<body onKeyPress="keypress(event)">
 		<!-- SCRIPT -->		
-			<script src="src/js/manage_room.js"></script>
 			<script>
 				refresh();
 			</script>
 		<!-- SCRIPT -->
 
 		<!-- BODY -->
+
+			<!-- player 1 -->
 			<div style= "float: left; border:solid;">
-				<h1 > <?php echo $_SESSION['pseudo']; ?></h1>
-				<p  >Vie : <span id="life_me"></span></p>
+				<h1> <?php echo $_SESSION['pseudo']; ?></h1>
+				<p>Vie : <span id="life_me"></span></p>
+				<!-- hidden element player 1 -->
 			</div>
+
+			<!-- player 2 -->
 			<div style= "float: right; border:solid;">
-				<h1 > <?php echo $player2_pseudo; ?></h1>
-				<p  >Vie : <span id="life_him" style= "float: right"></span> </p>
+				<h1> <?php echo $player2_pseudo; ?></h1>
+				<p>Vie : <span id="life_him" style= "float: right"></span></p>
+				<!-- hidden element player 2 -->
 			</div>
-			<h1 style= " text-align: center;">Room nb : <?php echo $_SESSION['roomname']; ?></h1>
+
+			<!-- global element -->
 			<h1 id="test_room" style="text-align: center;"></h1>
-			<button onclick="leave('button')">Leave !</button>
 			<button onclick="operation('attaquer')">Attaquer</button>
-			<!-- hidden element -->
-				<button id="redirect_button" style="display: none;" onclick="window.location = 'index.php';">Revenir à l'ecran principal</button>
-			<!-- hidden element -->
+			<div id="chatbox">
+				<div id="chat_content">
+					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
+					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
+					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
+					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
+					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
+				</div>
+				<div id="chat_send">
+					<input onfocus="this.style.opacity = '1';" onblur="this.style.opacity = '0.3';" type="text" name="chat" id="chat_input"/>
+					<button id="chat_button" onclick="click_newchat()">Envoyer</button>
+				</div>
+			</div>
+			<!-- hidden element global -->
+
 		<!-- BODY -->
 	</body>
 </html>
