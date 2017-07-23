@@ -14,12 +14,4 @@ function is_corect($pseudo)
 	
 	return true;
 }
-
-function pseudo_already_exist($pseudo, $db)
-{
-	$req_test_pseudo = $db->query("SELECT COUNT(*) as nb FROM player WHERE pseudo = '" . $pseudo . "'");
-	$data_test_pseudo = $req_test_pseudo->fetch();
-	if($data_test_pseudo['nb'] > 0) return true;
-	else return false;
-}
 ?>

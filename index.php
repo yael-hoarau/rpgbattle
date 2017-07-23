@@ -14,12 +14,12 @@ if(isset($_SESSION['roomname'])) /* systeme de redirection et de contole de secu
 	{
 		if($_SESSION['findstep'] == 3 OR $_SESSION['findstep'] == 2)
 		{
-			$del_room = $db->query("DELETE FROM room WHERE player1 = (SELECT id FROM player WHERE pseudo = '" . $_SESSION['pseudo'] . "') OR player2 = (SELECT id FROM player WHERE pseudo = '" . $_SESSION['pseudo'] . "')");
-			$del_user = $db->query("DELETE FROM player WHERE pseudo = '" . $_SESSION['pseudo'] . "'");
+			$del_room = $db->query("DELETE FROM room WHERE player1 = " . $_SESSION['id'] . " OR player2 = " . $_SESSION['id']);
+			$del_user = $db->query("DELETE FROM player WHERE id = " . $_SESSION['id']);
 		}
 		if($_SESSION['findstep'] == 1)
 		{
-			$del_user = $db->query("DELETE FROM player WHERE pseudo = '" . $_SESSION['pseudo'] . "'");
+			$del_user = $db->query("DELETE FROM player WHERE id = " . $_SESSION['id']);
 		}
 	}
 }								/* systeme de redirection et de contole de securité */

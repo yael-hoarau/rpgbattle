@@ -1,13 +1,13 @@
 <?php 
 require("src/php/function/db.php"); // connexion base de données
 session_start();
-if(!isset($_SESSION['pseudo']) OR !isset($_SESSION['roomname']) OR $_SESSION['roomname'] == "none")
+if(!isset($_SESSION['id']) OR !isset($_SESSION['roomname']) OR $_SESSION['roomname'] == "none")
 {
 	header("Location: ./index.php");
 	exit();
 }
 
-$req_player2_pseudo = $db->query("SELECT pseudo FROM player JOIN room WHERE player.pseudo != '" . $_SESSION['pseudo'] . "' AND (player.id = room.player1 OR player.id = room.player2)");
+$req_player2_pseudo = $db->query("SELECT pseudo FROM player JOIN room WHERE player.id != '" . $_SESSION['id'] . "' AND (player.id = room.player1 OR player.id = room.player2)");
 $data_player2_pseudo = $req_player2_pseudo->fetch();
 $player2_pseudo = $data_player2_pseudo['pseudo'];
 ?>
@@ -31,14 +31,14 @@ $player2_pseudo = $data_player2_pseudo['pseudo'];
 
 			<!-- player 1 -->
 			<div style= "float: left; border:solid;">
-				<h1> <?php echo $_SESSION['pseudo']; ?></h1>
+				<h1><?php echo $_SESSION['pseudo']; ?></h1>
 				<p>Vie : <span id="life_me"></span></p>
 				<!-- hidden element player 1 -->
 			</div>
 
 			<!-- player 2 -->
 			<div style= "float: right; border:solid;">
-				<h1> <?php echo $player2_pseudo; ?></h1>
+				<h1><?php echo $player2_pseudo; ?></h1>
 				<p>Vie : <span id="life_him" style= "float: right"></span></p>
 				<!-- hidden element player 2 -->
 			</div>

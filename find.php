@@ -17,14 +17,9 @@ if(!is_corect($_POST['pseudo']))
 
 $pseudo = $_POST['pseudo'];
 
-if(pseudo_already_exist($pseudo, $db))
-{
-	header('Location: ./index.php?eror=3');
-	exit();
-}
-
 $req = $db->query("INSERT INTO player (pseudo) VALUES ('" . $pseudo . "')");
 
+$_SESSION['id'] = $db->lastInsertId();
 $_SESSION['pseudo'] = $pseudo;
 $_SESSION['roomname'] = "none";
 $_SESSION['findstep'] = 1;
