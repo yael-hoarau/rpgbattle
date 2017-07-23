@@ -44,7 +44,7 @@ $player2_pseudo = $data_player2_pseudo['pseudo'];
 			</div>
 
 			<!-- global element -->
-			<h1 id="test_room" style="text-align: center;"></h1>
+			<h1 id="aff_global" style="text-align: center;"></h1>
 			<button onclick="operation('attaquer')">Attaquer</button>
 			<div id="chatbox">
 				<div id="chat_content">
@@ -60,7 +60,7 @@ $player2_pseudo = $data_player2_pseudo['pseudo'];
 				</div>
 			</div>
 			<!-- hidden element global -->
-
+			<button id="redirect_button" style="display:none;" onclick="window.location='./index.php';">Revenir à l'acceuil</button>
 		<!-- BODY -->
 	</body>
 </html>

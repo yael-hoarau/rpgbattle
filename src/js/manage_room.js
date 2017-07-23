@@ -18,21 +18,23 @@ function refresh()
 
 			if(data.system != "continue")
 			{
+				var aff_global = document.getElementById("aff_global");
+				document.getElementById("redirect_button").style.display = "inline-block";
 				switch(data.system)
 				{
 					case "win1":
 						//animation win
-						document.getElementById("test_room").innerHTML = "Vous avez anéanti le joueur adverse !";
+						aff_global.innerHTML = "Vous avez anéanti le joueur adverse !";
 					break;
 
 					case "win2":
 						//animation win
-						document.getElementById("test_room").innerHTML = "Le joueur adverse à pris la fuite !";
+						aff_global.innerHTML = "Le joueur adverse à pris la fuite !";
 					break;
 
 					case "lose":
 						// animation lose
-						document.getElementById("test_room").innerHTML = "Le joueur adverse à été meilleur cette fois !";
+						aff_global.innerHTML = "Le joueur adverse à été meilleur cette fois !";
 					break;
 				}
 			}
