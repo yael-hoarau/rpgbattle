@@ -1,6 +1,7 @@
 <?php
 session_start();
 require("../php/function/db.php");
+require("../php/function/chat.php");
 
 
 function isPresent($id, $db)
@@ -133,9 +134,12 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 			}
 		}
 
+		$chat = chat($db);
+
 		$data_refresh = array ("player1" => $player1,
 								"player2" => $player2,
-								"system" => $system);
+								"system" => $system,
+								"chat" => $chat);
 
 		echo json_encode($data_refresh);
 	}
