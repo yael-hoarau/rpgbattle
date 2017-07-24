@@ -13,7 +13,7 @@ function isPresent($id, $db)
 	return  $ping_date > $current_date;
 }
 
-function finish_room()
+function finish_room($db)
 {
 	$db->query("UPDATE room SET state = 'finish', last_op = '" . date('Y-m-d H:i:s') . "' WHERE id = " . $_SESSION['idroom']);
 	session_destroy();
@@ -56,8 +56,8 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 		if($_GET['type'] == "create" and $_SESSION['findstep'] == 2)
 		{
 			$date_create = date('Y-m-d H:i:s');
-			$req_create = $db->prepare("INSERT INTO room (date_create, player1) VALUES (:date_create, :player1)");
-			$res = $req_create->execute(array('date_create' => $date_create, 'player1' => $_SESSION['id']));
+			$req_create = $db->prepare("INSERT INTO room (date_create, player1, last_op) VALUES (:date_create, :player1, :last_op)");
+			$res = $req_create->execute(array('date_create' => $date_create, 'player1' => $_SESSION['id'], 'last_op' => $date_create));
 			if($res == false)
 			{
 				$del_onfail = $db->query("DELETE FROM player WHERE id = " . $_SESSION['id']);
@@ -108,7 +108,7 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 		
 		if(!isPresent($data_player2['id'], $db))
 		{
-			finish_room();
+			finish_room($db);
 			$system = "win2";
 		}
 		else
@@ -118,12 +118,12 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 			{
 				if($data_players['id'] == $_SESSION['id'])
 				{
-					finish_room();
+					finish_room($db);
 					$system = "lose";
 				}
 				else
 				{
-					finish_room();
+					finish_room($db);
 					$system = "win1";
 				}
 			}

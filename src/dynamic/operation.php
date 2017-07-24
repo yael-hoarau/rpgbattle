@@ -2,9 +2,9 @@
 session_start();
 require("../php/function/db.php");
 
-if(isset($_SESSION['idroom']) and $_SESSION['idroom'] != -1 )
+if(isset($_SESSION['idroom']) and $_SESSION['idroom'] != -1)
 {
-	$req_state = $db->query("SELECT state FROM room WHERE id = " . $_SESSION['idroom'] );
+	$req_state = $db->query("SELECT state FROM room WHERE id = " . $_SESSION['idroom']);
 	$data_state = $req_state->fetch();
 	if($data_state['state'] == "running")
 	{
@@ -12,12 +12,11 @@ if(isset($_SESSION['idroom']) and $_SESSION['idroom'] != -1 )
 		$data_target = $req_target->fetch();
 		switch($_GET['action'])
 		{
-			case "attaquer" :
-				
+			case "attaquer":
 				$target_life = (int)$data_target['life'] - 10;
 				$db->exec("UPDATE player SET life = (" . $target_life . ") WHERE player.id = " . $data_target['id']);
 			break;
-			default :
+			default:
 				exit();
 			break;
 
