@@ -21,7 +21,7 @@ $req = $db->query("INSERT INTO player (pseudo) VALUES ('" . $pseudo . "')");
 
 $_SESSION['id'] = $db->lastInsertId();
 $_SESSION['pseudo'] = $pseudo;
-$_SESSION['roomname'] = "none";
+$_SESSION['idroom'] = -1;
 $_SESSION['findstep'] = 1;
 ?>
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 <?php 
 require("src/php/function/db.php"); // connexion base de données
 session_start();
-if(!isset($_SESSION['id']) OR !isset($_SESSION['roomname']) OR $_SESSION['roomname'] == "none")
+if(!isset($_SESSION['id']) OR !isset($_SESSION['idroom']) OR $_SESSION['idroom'] == -1)
 {
 	header("Location: ./index.php");
 	exit();

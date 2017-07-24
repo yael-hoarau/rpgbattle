@@ -3,14 +3,14 @@ session_start(); //lancement de la session
 
 require("src/php/function/db.php"); // connexion base de données
 
-if(isset($_SESSION['roomname'])) /* systeme de redirection et de contole de securité */
+if(isset($_SESSION['idroom'])) /* systeme de redirection et de contole de securité */
 {
-	if($_SESSION['roomname'] != "none")
+	if($_SESSION['idroom'] != -1)
 	{
 		header('Location: ./room.php');
 		exit();
 	}
-	if($_SESSION['roomname'] == "none")
+	if($_SESSION['idroom'] == -1)
 	{
 		if($_SESSION['findstep'] == 3 OR $_SESSION['findstep'] == 2)
 		{
