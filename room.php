@@ -50,9 +50,6 @@ $player2_pseudo = $data_player2_pseudo['pseudo'];
 				<div id="chat_content">
 					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
 					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
-					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
-					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
-					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
 				</div>
 				<div id="chat_send">
 					<input onfocus="this.style.opacity = '1';" onblur="this.style.opacity = '0.3';" type="text" name="chat" id="chat_input"/>
