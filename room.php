@@ -7,7 +7,7 @@ if(!isset($_SESSION['id']) OR !isset($_SESSION['idroom']) OR $_SESSION['idroom']
 	exit();
 }
 
-$req_player2_pseudo = $db->query("SELECT pseudo FROM player JOIN room WHERE player.id != '" . $_SESSION['id'] . "' AND (player.id = room.player1 OR player.id = room.player2) AND room.id = " . $_SESSION['idroom'] );
+$req_player2_pseudo = $db->query("SELECT pseudo FROM player JOIN room WHERE player.id != '" . $_SESSION['id'] . "' AND (player.id = room.player1 OR player.id = room.player2) AND room.id = " . $_SESSION['idroom']);
 $data_player2_pseudo = $req_player2_pseudo->fetch();
 $player2_pseudo = $data_player2_pseudo['pseudo'];
 ?>

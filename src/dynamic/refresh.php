@@ -91,8 +91,8 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 
 		// Refresh attributs
 		
-		$req_player1 = $db->query("SELECT player.id, ping, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id = " . $_SESSION['id']);
-		$req_player2 = $db->query("SELECT player.id, ping, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id != " . $_SESSION['id']);
+		$req_player1 = $db->query("SELECT player.id, ping, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id = " . $_SESSION['id'] . " AND room.id = " . $_SESSION['idroom']);
+		$req_player2 = $db->query("SELECT player.id, ping, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id != " . $_SESSION['id'] . " AND room.id = " . $_SESSION['idroom']);
 		$data_player1 = $req_player1->fetch();
 		$data_player2 = $req_player2->fetch();
 
@@ -112,7 +112,7 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 		}
 		else
 		{
-			$req_players = $db->query("SELECT player.id FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND life <= 0");
+			$req_players = $db->query("SELECT player.id FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND room.id = " . $_SESSION['idroom'] . " AND life <= 0");
 			if($data_players = $req_players->fetch())
 			{
 				if($data_players['id'] == $_SESSION['id'])
