@@ -4,7 +4,7 @@ function insert_chat(tab)
 	var chat = document.getElementById("chat_content");
 	for(var i = 0;i<count(tab);i++)
 	{
-		chat.innerHTML += "<p class=\"talk\">" + tab.pseudo[i] . " : " . tab.content[i] . "</p>";
+		chat.innerHTML += "<p class=\"talk\">" + tab.pseudo[i] + " : " + tab.content[i] + "</p>";
 	}
 }
 
@@ -51,9 +51,9 @@ function click_newchat()
 function insert_chat(tab)
 {
 	var chat = document.getElementById("chat_content");
-	for(var i = 0;i<count(tab);i++)
+	for(var i = 0;i<tab.pseudo.length;i++)
 	{
-		chat.innerHTML += "<p class=\"talk\">" + tab.pseudo[i] . " : " . tab.content[i] . "</p>";
+		chat.innerHTML = chat.innerHTML + "<p class=\"talk\">" + tab.pseudo[i] + " : " + tab.content[i] + "</p>";
 	}
 }
 
@@ -70,7 +70,7 @@ function refresh()
 			var content = xhr3.responseText;
 			var data = JSON.parse(content);
 
-			insert_chat(data.chat);
+			if(data.chat != "nothing") insert_chat(data.chat);
 
 			document.getElementById("life_me").innerHTML = data.player1.life;
 			document.getElementById("life_him").innerHTML = data.player2.life;
@@ -116,8 +116,8 @@ function operation(action)
 function newchat(chat)
 {
 	var xhr5 = new XMLHttpRequest();
-	xhr5.open('GET', 'src/dynamic/chat.php');
-
+	xhr5.open('POST', 'src/dynamic/chatbox.php');
+	xhr5.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr5.addEventListener('readystatechange', function()
 	{
 		if(xhr5.readyState == XMLHttpRequest.DONE && xhr5.status == 200)
@@ -130,6 +130,10 @@ function newchat(chat)
 			else if(content == "eror2")
 			{
 				alert("Ereur lors de l'envoie du message !");
+			}
+			else if(content == "nothing")
+			{
+				alert("nothing");
 			}
 			else
 			{

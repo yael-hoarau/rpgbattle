@@ -86,8 +86,6 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 		}
 	}
 
-
-
 	else
 	{
 
@@ -135,6 +133,10 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 		}
 
 		$chat = chat($db);
+		if($chat == false)
+		{
+			$chat = "nothing";
+		}
 
 		$data_refresh = array ("player1" => $player1,
 								"player2" => $player2,

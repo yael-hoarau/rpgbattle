@@ -1,7 +1,12 @@
 <?php
 session_start(); //lancement de la session
-
 require("src/php/function/db.php"); // connexion base de données
+require("src/php/function/security.php");
+if(test_ban($_SERVER['REMOTE_ADDR'], $db))
+{
+	header('Location: http://bfy.tw/D11J');
+	exit();
+}
 
 if(isset($_SESSION['idroom'])) /* systeme de redirection et de contole de securité */
 {
@@ -10,17 +15,9 @@ if(isset($_SESSION['idroom'])) /* systeme de redirection et de contole de securi
 		header('Location: ./room.php');
 		exit();
 	}
-	if($_SESSION['idroom'] == -1)
+	else
 	{
-		if($_SESSION['findstep'] == 3 OR $_SESSION['findstep'] == 2)
-		{
-			$del_room = $db->query("DELETE FROM room WHERE player1 = " . $_SESSION['id'] . " OR player2 = " . $_SESSION['id']);
-			$del_user = $db->query("DELETE FROM player WHERE id = " . $_SESSION['id']);
-		}
-		if($_SESSION['findstep'] == 1)
-		{
-			$del_user = $db->query("DELETE FROM player WHERE id = " . $_SESSION['id']);
-		}
+		session_destroy();
 	}
 }								/* systeme de redirection et de contole de securité */
 ?>

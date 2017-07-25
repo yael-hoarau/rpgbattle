@@ -1,7 +1,14 @@
 <?php 
 session_start();
 require("src/php/function/db.php");
+require("src/php/function/security.php");
 require("src/php/function/test_pseudo.php");
+
+if(test_ban($_SERVER['REMOTE_ADDR'], $db))
+{
+	header('Location: http://bfy.tw/D11J');
+	exit();
+}
 
 if(!isset($_POST['pseudo']))
 {
