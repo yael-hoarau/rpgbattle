@@ -75,6 +75,19 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 
 		if($_GET['type'] == "ready" and $_SESSION['findstep'] == 3)
 		{
+			if(!isset($_SESSION['lastPingInWaiting']))
+			{
+				$_SESSION['lastPingInWaiting'] = 1;
+			}
+			else
+			{
+				$_SESSION['lastPingInWaiting'] = $_SESSION['lastPingInWaiting'] + 1;
+				if($_SESSION['lastPingInWaiting'] > 40)
+				{
+					$db->query("UPDATE room SET last_op = '" . date('Y-m-d H:i:s') . "' WHERE player1 = " . $_SESSION['id']);
+					$_SESSION['lastPingInWaiting'] = 0;
+				}
+			}
 			$req_test = $db->query("SELECT id, state FROM room WHERE player1 = " . $_SESSION['id'] . " OR player2 = " . $_SESSION['id']. " LIMIT 1");
 			$data_test = $req_test->fetch();
 			if($data_test['state'] == "waiting") echo "notyet";
