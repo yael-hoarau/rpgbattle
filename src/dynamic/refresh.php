@@ -91,13 +91,17 @@ if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 
 		// Refresh attributs
 		
-		$req_player1 = $db->query("SELECT player.id, ping, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id = " . $_SESSION['id'] . " AND room.id = " . $_SESSION['idroom']);
-		$req_player2 = $db->query("SELECT player.id, ping, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id != " . $_SESSION['id'] . " AND room.id = " . $_SESSION['idroom']);
+		$req_player1 = $db->query("SELECT player.id, ping, life, mana, shield FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id = " . $_SESSION['id'] . " AND room.id = " . $_SESSION['idroom']);
+		$req_player2 = $db->query("SELECT player.id, ping, life, mana, shield FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id != " . $_SESSION['id'] . " AND room.id = " . $_SESSION['idroom']);
 		$data_player1 = $req_player1->fetch();
 		$data_player2 = $req_player2->fetch();
 
-		$player1 = array( "life" => $data_player1['life']);
-		$player2 = array( "life" => $data_player2['life']);
+		$player1 = array( "life" => $data_player1['life'],
+						  "mana" => $data_player1['mana'],
+						  "shield" => $data_player1['shield']);
+		$player2 = array( "life" => $data_player2['life'],
+						  "mana" => $data_player2['mana'],
+						  "shield" => $data_player2['shield']);
 
 
 

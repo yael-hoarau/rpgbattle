@@ -32,14 +32,22 @@ $player2_pseudo = $data_player2_pseudo['pseudo'];
 			<!-- player 1 -->
 			<div style= "float: left; border:solid;">
 				<h1><?php echo $_SESSION['pseudo']; ?></h1>
-				<p>Vie : <span id="life_me"></span></p>
+				<p>
+					Vie : <span id="my_life"></span><br>
+					Mana : <span id="my_mana"></span><br>
+					Bouclier : <span id="my_shield"></span><br>
+				</p>
 				<!-- hidden element player 1 -->
 			</div>
 
 			<!-- player 2 -->
 			<div style= "float: right; border:solid;">
 				<h1><?php echo $player2_pseudo; ?></h1>
-				<p>Vie : <span id="life_him" style= "float: right"></span></p>
+				<p>
+					Vie : <span id="his_life" ></span><br>
+					Mana : <span id="his_mana" ></span><br>
+					Bouclier : <span id="his_shield" ></span><br>
+				</p>
 				<!-- hidden element player 2 -->
 			</div>
 

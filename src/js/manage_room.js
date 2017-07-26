@@ -72,8 +72,12 @@ function refresh()
 
 			if(data.chat != "nothing") insert_chat(data.chat);
 
-			document.getElementById("life_me").innerHTML = data.player1.life;
-			document.getElementById("life_him").innerHTML = data.player2.life;
+			document.getElementById("my_life").innerHTML = data.player1.life;
+			document.getElementById("his_life").innerHTML = data.player2.life;
+			document.getElementById("my_mana").innerHTML = data.player1.mana;
+			document.getElementById("his_mana").innerHTML = data.player2.mana;
+			document.getElementById("my_shield").innerHTML = data.player1.shield;
+			document.getElementById("his_shield").innerHTML = data.player2.shield;
 
 			if(data.system != "continue")
 			{

@@ -8,7 +8,7 @@ if(isset($_SESSION['idroom']) and $_SESSION['idroom'] != -1)
 	$data_state = $req_state->fetch();
 	if($data_state['state'] == "running")
 	{
-		$req_target = $db->query("SELECT player.id, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id != " . $_SESSION['id']);
+		$req_target = $db->query("SELECT player.id, life FROM player JOIN room WHERE (player.id = room.player1 OR player.id = room.player2) AND player.id != " . $_SESSION['id'] . " AND room.id = " . $_SESSION['idroom']);
 		$data_target = $req_target->fetch();
 		switch($_GET['action'])
 		{
