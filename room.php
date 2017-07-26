@@ -54,6 +54,7 @@ $player2_pseudo = $data_player2_pseudo['pseudo'];
 			<!-- global element -->
 			<h1 id="aff_global" style="text-align: center;"></h1>
 			<button onclick="operation('attaquer')">Attaquer</button>
+			<button onclick="operation('bouclier')">Bouclier ( 20 pour 10 mana)</button>
 			<div id="chatbox">
 				<div id="chat_content">
 					<p class="talk"><span>Antidot: </span> Voila le message envoyer ya 2 minutes par antidot mec fait toi plaisir avec le resize de fou que tu te mange la</p>
