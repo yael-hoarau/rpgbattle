@@ -24,7 +24,7 @@ function finish_room($db)
 
 if(isset($_SESSION['idroom']) and isset($_SESSION['id']))
 {
-	$db->exec("UPDATE player SET ping = '" .  date('Y-m-d H:i:s') ."' WHERE id = " . $_SESSION['id']);
+	$db->query("UPDATE player SET ping = '" . date('Y-m-d H:i:s') . "' WHERE id = " . $_SESSION['id']);
 
 	//Find Room
 	if(isset($_SESSION['findstep']) and $_SESSION['idroom'] == -1 and isset($_GET['type']))
