@@ -7,12 +7,14 @@ try
 	}
 	else
 	{
-		$db = new PDO('mysql:host=localhost;dbname=rpgbattle', 'rpgbattle', 'antidot1');
+        $db = new PDO('mysql:host=mysql-test-jdbc-yael.alwaysdata.net;dbname=test-jdbc-yael_rpgbattle',
+            '144519', 'yael');
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	}
 	
 }
-catch(exeption $e)
+catch(PDOexeption $e)
 {
-	echo "Site en maintenance ...";
+	echo "Site en maintenance ...";exit();
 }
 ?>

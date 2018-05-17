@@ -6,6 +6,9 @@ require("../php/function/chat.php");
 
 if(isset($_SESSION['idroom']) and isset($_SESSION['id']) and $_SESSION['idroom'] != -1 and $_POST['content'])
 {
+    header('Cache-Control: no-cache, must-revalidate');
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+    header('Content-type: application/json');
 	if(!control_chat($_POST['content']))
 	{
 		$req_new_chat = $db->prepare("INSERT INTO chat(room, player, content, date_create) VALUES (:room, :player, :content, :date_create)");

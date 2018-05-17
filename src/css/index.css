@@ -1,0 +1,106 @@
+table, td, th
+{
+    border: 1px black solid;
+}
+table
+{
+    border-collapse: collapse;
+}
+
+#leaderboard
+{
+    border-collapse: separate;
+    border-radius: 10px;
+}
+#change_table_score
+{
+    border: 2px black inset;
+    border-radius: 10px;
+    cursor: pointer;
+    background:grey;
+}
+#change_table_victory
+{
+    border: 2px black outset;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#forms
+{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2vmax;
+
+}
+
+#error_indication
+{
+    text-align: center;
+}
+
+#form_guest
+{
+    margin-bottom: 1vmax;
+    border: 2px black dashed;
+    display: inline-block;
+    padding: 1vmax;
+    border-radius: 10px;
+}
+
+#leaderboard
+{
+    position: absolute;
+    right: 3vmax;
+    bottom: 3vmax;
+    max-width: 20vmax;
+}
+
+#change_form
+{
+    border-radius: 3vmax;
+    margin-top: 1vmax;
+    padding: 1vmax;
+}
+
+#info_stats
+{
+    position: absolute;
+    left: 3vmax;
+    bottom: 3vmax;
+    max-width: 35vmax;
+}
+
+#connected
+{
+    text-align: center;
+    font-size: 2vmax;
+}
+
+#find{
+    text-align: center;
+}
+
+#img_gif{
+    max-width: 10vmax;
+}
+
+
+
+#tab_run{
+    margin-top: 2vmax;
+}
+.table_title{
+    max-height: 1px;
+}
+
+
+.table_title{
+    max-height: 1px;
+}
+
+body {
+    background-image: url('../img/rainbow.jpg');
+    background-size: 100%;
+
+}

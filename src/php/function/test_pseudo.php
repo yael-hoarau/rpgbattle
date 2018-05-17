@@ -11,7 +11,14 @@ function is_corect($pseudo)
 		else if($tmp > 96 and $tmp < 123) continue;
 		else return false;
 	}
-	
 	return true;
+}
+
+function is_taken_by_user($pseudo, $db)
+{
+    $req_pseudo = $db->query("SELECT pseudo FROM user WHERE pseudo ='" . $pseudo . "'" );
+    if($req_pseudo->fetch())
+        return true;
+    return false;
 }
 ?>

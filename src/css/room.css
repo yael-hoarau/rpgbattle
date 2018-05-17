@@ -1,36 +1,191 @@
+
+#history
+{
+	border: 2px saddlebrown solid;
+	box-shadow : 0 0 100px 10px burlywood;
+
+	width: 30vmax;
+	height: 15vmax;
+	position: absolute;
+	bottom: 5vmax;
+	left: 5vmax;
+	padding: 1vmax;
+	overflow: auto;
+	background-color: wheat;
+}
+
+.history_action
+{
+	margin: 0;
+	padding: 2px;
+}
+
+
 #chatbox
 {
 	width: 30vmax;
-	height: 10vmax;
-	border: 1px red solid;
+	height: 15vmax;
+	box-shadow : 0 0 100px 10px burlywood;
+	border: 2px burlywood solid;
+	padding: 1vmax;
 	position: absolute;
-	bottom: 1vmax;
-	left: 35vmax;
+	bottom: 5vmax;
+	Right: 5vmax;
+	z-index: -1;
+	word-wrap:break-word;
+	background-color: beige;
+
 }
 
 #chat_content
 {
 	width: 100%;
-	height: 8.5vmax;
+	height: 100%;
 	overflow: auto;
+
 }
 
 .talk
 {
-	border-top: 1px black dashed;
+	margin: 0; padding:2px;
+	/*border-left: 2px wheat solid;
+	border-right: 2px wheat solid;*/
 }
 
 #chat_button
 {
-	height: 1.5vmax;
-	width: 4.6vmax;
+
 }
 
 #chat_input
 {
 	width: 25vmax;
 	height: 1.2vmax;
-	border: none;
-	border-top: 1px red solid;
+	/*border: 1px beige solid;*/
+	opacity: 0.3;
+	margin-top: 2vmax;
+}
+
+#chat_input:focus
+{
+	outline: none;
+	background-color: beige;
+	border: 1px wheat solid;
 	opacity: 0.3;
 }
+
+#my_character
+{
+	float: left;
+	border-radius: 20px;
+	position: fixed;
+	margin: 1vmax;
+	padding: 1vmax;
+	background: rgba(255,255,255,0.2);
+	box-shadow : 0 0 0 0 green;
+}
+
+#his_character
+{
+	float: right;
+	border-radius: 20px;
+	margin: 1vmax;
+	padding: 1vmax;
+	background: rgba(255,255,255,0.2);
+	box-shadow : 0 0 0 0 green;
+}
+
+#global_elements
+{
+	text-align: center;
+	margin-left: 10vmax;
+}
+
+#actions
+{
+
+}
+#redirect_button
+{
+	display: none;
+	margin-top: 2vmax;
+}
+
+#indication
+{
+	font-size: 30px;
+	font-weight: bold;
+	color: red;
+	margin-top: 10vmax;
+    background: wheat;
+
+}
+
+#indication_turn
+{
+	font-size: 30px;
+	font-weight: bold;
+	font-family: "DejaVu Serif";
+}
+
+
+
+.prec{
+	top: 0.7vmax;
+	position: relative;
+}
+
+.circle{
+	position: relative;
+	top: 0.3vmax;
+	left: 0.3vmax;
+	text-align: center;
+	width: 3vmax;
+	height: 3vmax;
+	border-radius: 100%;
+	background-color: #E6F4F7;
+}
+
+.active-border{
+	position:relative;
+	left: 48vmax;
+	text-align: center;
+	width: 3.6vmax;
+	height: 3.6vmax;
+	border-radius: 100%;
+
+	background-color:#39B4CC;
+	background-imagxe:
+			linear-gradient(1deg, transparent 50%, #A2ECFB 50%),
+			linear-gradient(0deg, #A2ECFB 50%, transparent 50%);
+}
+
+@keyframes shadowPulse {
+	0% {
+		box-shadow: 0px 0px 0px 0px green;
+	}
+
+	50%{
+		box-shadow: 0px 0px 20px 0px green;
+	}
+
+	100% {
+		box-shadow: 0px 0px 0px 0px green;
+	}
+}
+
+.shadow-pulse {
+	animation-name: shadowPulse;
+	animation-duration: 1.0s;
+	animation-iteration-count: 100;
+	animation-timing-function: linear;
+}
+
+
+@media (min-width:1201px) {
+	body {
+		background-image: url('../img/background_soft1.jpg');
+		background-size: 100%;
+	}
+}
+
